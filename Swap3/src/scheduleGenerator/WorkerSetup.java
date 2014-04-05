@@ -238,7 +238,7 @@ public class WorkerSetup extends javax.swing.JFrame {
 												javax.swing.GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE)));
 		// Prevents a nullPointer
-		// TEAM 4 SWAP 3 Fixed Bug.
+		// TEAM 4 SWAP 3 ENHANCEMENT. Made it so that the workers are added with the proper names, allowed by the refactoring.
 			this.workerTabs.add(tempWorkerTab);
 			this.workerTabPanel.addTab(
 					"Worker " + String.valueOf(++this.workerName), null,
