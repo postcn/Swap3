@@ -1,5 +1,7 @@
 package scheduleGenerator;
 
+import java.awt.BorderLayout;
+import java.awt.LayoutManager;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -7,7 +9,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.SwingUtilities;
 
 /**
  * This class handles the interaction of one frame to another as well as
@@ -94,6 +104,68 @@ public class Main {
 	// the Config class.
 	// ######################################################################
 	public static void refresh(Config conf, ArrayList<Day> days) {
+//		cal.setVisible(false);
+//		try {
+//			SwingUtilities.invokeAndWait ( new Runnable ()
+//			{
+//			    public void run ()
+//			    {
+//			        cal.setVisible ( true );
+//			    }
+//			} );
+//		} catch (InvocationTargetException e1) {
+//			e1.printStackTrace();
+//		} catch (InterruptedException e1) {
+//			e1.printStackTrace();
+//		}
+//		
+//		final JDialog load = new JDialog(cal);
+//
+//	    JPanel panel2 = new JPanel ( new BorderLayout () );
+//	    panel2.setBorder ( BorderFactory.createEmptyBorder ( 15, 15, 15, 15 ) );
+//	    load.add ( panel2 );
+//
+//	    final JProgressBar progressBar = new JProgressBar ( 0, 100 );
+//	    panel2.add ( progressBar );
+//
+//	    load.setModal ( false );
+//	    load.pack ();
+//	    load.setLocationRelativeTo (cal);
+//
+//	    try {
+//			SwingUtilities.invokeAndWait ( new Runnable ()
+//			{
+//			    public void run ()
+//			    {
+//			        load.setVisible ( true );
+//			    }
+//			} );
+//		} catch (InvocationTargetException e) {
+//			e.printStackTrace();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+//	    for ( int i = 0; i < 100; i++ )
+//	    {
+//	        try {
+//				Thread.sleep ( 100 );
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//
+//	        final JButton button = new JButton ( "Button" + i );
+//	        final int finalI = i;
+//
+//	        // Updating panel and progress in EDT
+//	        SwingUtilities.invokeLater ( new Runnable ()
+//	        {
+//	            public void run ()
+//	            {
+//	                button.revalidate ();
+//	                progressBar.setValue ( finalI );
+//	            }
+//	        } );
+//	    }
 		setDays(days);
 		wSet = new WorkerSetup();
 		toggleWorkerSetup();
