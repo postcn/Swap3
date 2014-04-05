@@ -76,7 +76,7 @@ public class Config extends javax.swing.JFrame {
 			dayPanels[i].getCheckBox().doClick();
 			ArrayList<String> jobs = days.get(i).getJobs();
 			for (String job : jobs) {
-				this.dayPanels[6].getModel().addElement(job);
+				this.dayPanels[i].getModel().addElement(job);
 			}
 
 		}
