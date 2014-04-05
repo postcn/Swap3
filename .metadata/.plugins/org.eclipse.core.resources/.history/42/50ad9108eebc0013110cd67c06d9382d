@@ -63,9 +63,6 @@ public class CalendarGUI extends javax.swing.JFrame {
 	/*
 	 * SWAP 3 TEAM 4
 	 * ENHANCEMENT FROM REFACTORING
-	 * This refactoring enables us to internationalize the names for the months and days of week.
-	 * Of interest is the new locale field in main, and the LocalizerChoice dialog which chooses
-	 * Which language you want.
 	 */
 	private void setTitleMonth(int n, int year) {
 		this.monthName = new DateFormatSymbols(Main.locale).getMonths()[n - 1] + " "

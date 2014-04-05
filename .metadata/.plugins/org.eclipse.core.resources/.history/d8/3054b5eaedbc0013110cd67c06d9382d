@@ -59,14 +59,6 @@ public class CalendarGUI extends javax.swing.JFrame {
 	// for month name, java's DateFormatSymbols package can be used
 	// Also set monthName first, so that it could be used to set the JLabel
 	// rather than creating the string again.
-	
-	/*
-	 * SWAP 3 TEAM 4
-	 * ENHANCEMENT FROM REFACTORING
-	 * This refactoring enables us to internationalize the names for the months and days of week.
-	 * Of interest is the new locale field in main, and the LocalizerChoice dialog which chooses
-	 * Which language you want.
-	 */
 	private void setTitleMonth(int n, int year) {
 		this.monthName = new DateFormatSymbols(Main.locale).getMonths()[n - 1] + " "
 				+ year;
