@@ -1,6 +1,9 @@
 package scheduleGenerator;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.LayoutManager;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,13 +14,21 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
+
+import com.sun.awt.AWTUtilities;
 
 /**
  * This class handles the interaction of one frame to another as well as
@@ -104,73 +115,55 @@ public class Main {
 	// the Config class.
 	// ######################################################################
 	public static void refresh(Config conf, ArrayList<Day> days) {
-//		cal.setVisible(false);
-//		try {
-//			SwingUtilities.invokeAndWait ( new Runnable ()
-//			{
-//			    public void run ()
-//			    {
-//			        cal.setVisible ( true );
-//			    }
-//			} );
-//		} catch (InvocationTargetException e1) {
-//			e1.printStackTrace();
-//		} catch (InterruptedException e1) {
-//			e1.printStackTrace();
-//		}
-//		
-//		final JDialog load = new JDialog(cal);
-//
-//	    JPanel panel2 = new JPanel ( new BorderLayout () );
-//	    panel2.setBorder ( BorderFactory.createEmptyBorder ( 15, 15, 15, 15 ) );
-//	    load.add ( panel2 );
-//
-//	    final JProgressBar progressBar = new JProgressBar ( 0, 100 );
-//	    panel2.add ( progressBar );
-//
-//	    load.setModal ( false );
-//	    load.pack ();
-//	    load.setLocationRelativeTo (cal);
-//
-//	    try {
-//			SwingUtilities.invokeAndWait ( new Runnable ()
-//			{
-//			    public void run ()
-//			    {
-//			        load.setVisible ( true );
-//			    }
-//			} );
-//		} catch (InvocationTargetException e) {
-//			e.printStackTrace();
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//	    for ( int i = 0; i < 100; i++ )
-//	    {
-//	        try {
-//				Thread.sleep ( 100 );
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-//
-//	        final JButton button = new JButton ( "Button" + i );
-//	        final int finalI = i;
-//
-//	        // Updating panel and progress in EDT
-//	        SwingUtilities.invokeLater ( new Runnable ()
-//	        {
-//	            public void run ()
-//	            {
-//	                button.revalidate ();
-//	                progressBar.setValue ( finalI );
-//	            }
-//	        } );
-//	    }
+		
 		setDays(days);
 		wSet = new WorkerSetup();
 		toggleWorkerSetup();
 		config = conf;
 		toggleConfig();
+	}
+	
+	// ######################################################################
+	// SWAP 2, TEAM 3
+	// REFACTORING - Feature Envy
+	// The feature envy block above was true, but we found more in the next method of workerSetup
+	// This feature envy let us add a spinner that shows loading for the calendar.
+	// We manually made it stay open for one second since this is instantaneous, but we would
+	// Have scheduled multiple threads if it was necessary to actually load components.
+	// ######################################################################
+	public static void regenerate(ArrayList<Worker> workers, boolean isForced) {
+		HTMLGenerator.reset();
+		setWorkers(workers);
+		setSchedule(new Schedule(Main.getDays(), Main.getWorkers(), isForced));
+		dumpConfigFile();
+		cal = new CalendarGUI(Main.getSchedule());
+		cal.setVisible(false);
+		final JDialog dialog = new JDialog(cal);
+		dialog.setSize(325,200);
+		dialog.setLocationRelativeTo(cal);
+
+		JLabel label = new JLabel();
+		ImageIcon ii = new ImageIcon("images/spinner.gif");
+		label.setIcon(ii);
+
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(0,0,0,0));
+		panel.add(label);
+		dialog.add(panel);
+
+		dialog.setVisible(true);
+		toggleWorkerSetup();
+		
+		
+		class CloseSpinner extends TimerTask {
+		    public void run() {
+		    	dialog.dispose();
+		    	toggleCalendar();
+		    	
+		    }
+		 }
+		Timer timer = new Timer();
+		timer.schedule(new CloseSpinner(), 1000);
 	}
 
 	/**

@@ -478,13 +478,7 @@ public class WorkerSetup extends javax.swing.JFrame {
 			this.isForced = true;
 		}
 		if (allGood) {
-			HTMLGenerator.reset();
-			Main.setWorkers(workers);
-			Main.setSchedule(new Schedule(Main.getDays(), Main.getWorkers(), this.isForced));
-			Main.dumpConfigFile();
-			Main.cal = new CalendarGUI(Main.getSchedule());
-			Main.toggleCalendar();
-			Main.toggleWorkerSetup();
+			Main.regenerate(workers, this.isForced);
 		}
 	}
 
