@@ -1,0 +1,12 @@
+package scheduleGenerator;
+
+import javax.swing.JDialog;
+
+public class LocalizerChoice extends JDialog {
+	
+	public LocalizerChoice() {
+		String[] languages = {"English", "Spanish", "French", "German"};
+		JComboBox languages = new JComboBox(languages);
+	}
+
+}

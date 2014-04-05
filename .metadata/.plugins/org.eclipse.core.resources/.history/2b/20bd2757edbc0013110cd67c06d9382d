@@ -158,7 +158,7 @@ public class Main {
 		dialog.add(panel);
 
 		dialog.setVisible(true);
-		if (wSet != null && wSet.isVisible()) {
+		if (wSet != null and wSet.isVisible()) {
 			toggleWorkerSetup();
 		}
 		

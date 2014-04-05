@@ -281,7 +281,7 @@ public class CalendarGUI extends javax.swing.JFrame {
 	// ii. Rather than using a large repetitive switch statement
 	// for day name, java's DateFormatSymbols package can be used
 	private String getNameforNum(int n) {
-		return new DateFormatSymbols(Main.locale).getWeekdays()[n];
+		return new DateFormatSymbols().getWeekdays()[n];
 	}
 
 	private void initComponents() {

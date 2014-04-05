@@ -1,0 +1,35 @@
+package scheduleGenerator;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Hashtable;
+import java.util.Locale;
+
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+
+public class LocalizerChoice extends JDialog implements ActionListener {
+	JComboBox<String> languageBox;
+	Hashtable<String, String> languageConverter;
+	public LocalizerChoice() {
+		String[] languages = {"English", "Spanish", "French", "German"};
+		String[] codes = {"en","es","fr","ge"};
+		this.languageConverter = new Hashtable<String,String>();
+		for (int i=0; i<languages.length; i++) {
+			languageConverter.put(languages[i], codes[i]);
+		}
+		this.languageBox = new JComboBox<String>(languages);
+		this.languageBox.addActionListener(this);
+		this.add(languageBox);
+		this.setSize(100,50)
+		this.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		Main.locale= new Locale(languageConverter.get(languageBox.getSelectedItem()));
+		Main.regenerate(Main.getWorkers(), true);
+		this.dispose();
+	}
+
+}

@@ -1,0 +1,7 @@
+package scheduleGenerator;
+
+import javax.swing.JDialog;
+
+public class LocalizerChoice extends JDialog {
+
+}

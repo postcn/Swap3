@@ -139,9 +139,6 @@ public class Main {
 		setWorkers(workers);
 		setSchedule(new Schedule(Main.getDays(), Main.getWorkers(), isForced));
 		dumpConfigFile();
-		if (cal != null) {
-			cal.dispose();
-		}
 		cal = new CalendarGUI(Main.getSchedule());
 		cal.setVisible(false);
 		final JDialog dialog = new JDialog(cal);
@@ -158,9 +155,7 @@ public class Main {
 		dialog.add(panel);
 
 		dialog.setVisible(true);
-		if (wSet != null && wSet.isVisible()) {
-			toggleWorkerSetup();
-		}
+		toggleWorkerSetup();
 		
 		
 		class CloseSpinner extends TimerTask {

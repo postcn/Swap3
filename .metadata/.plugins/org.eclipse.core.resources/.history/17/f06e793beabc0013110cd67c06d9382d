@@ -14,7 +14,6 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -42,7 +41,6 @@ public class Main {
 	private static ArrayList<Day> days;
 	private static ArrayList<Worker> workers;
 	private static File path = new File("schedule_data.ser");
-	public static Locale locale = new Locale("en", "US");
 	
 	/**
 	 * Configures days.
@@ -126,7 +124,7 @@ public class Main {
 	}
 	
 	// ######################################################################
-	// SWAP 3, TEAM 4
+	// SWAP 2, TEAM 3
 	// REFACTORING - Feature Envy
 	// ENHANCEMENT FROM REFACTORING
 	// The feature envy block above was true, but we found more in the next method of workerSetup
@@ -139,9 +137,6 @@ public class Main {
 		setWorkers(workers);
 		setSchedule(new Schedule(Main.getDays(), Main.getWorkers(), isForced));
 		dumpConfigFile();
-		if (cal != null) {
-			cal.dispose();
-		}
 		cal = new CalendarGUI(Main.getSchedule());
 		cal.setVisible(false);
 		final JDialog dialog = new JDialog(cal);
@@ -158,9 +153,7 @@ public class Main {
 		dialog.add(panel);
 
 		dialog.setVisible(true);
-		if (wSet != null && wSet.isVisible()) {
-			toggleWorkerSetup();
-		}
+		toggleWorkerSetup();
 		
 		
 		class CloseSpinner extends TimerTask {
@@ -275,9 +268,5 @@ public class Main {
 			fileRecall.close();
 			recallConfig.close();
 		}
-	}
-	
-	public void setLocale(Locale l) {
-		locale = l;
 	}
 }
