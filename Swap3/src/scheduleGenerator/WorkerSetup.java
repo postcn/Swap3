@@ -31,6 +31,7 @@ public class WorkerSetup extends javax.swing.JFrame {
 	private ArrayList<Day> days;
 	private ArrayList<JPanel> workerTabs;
 	private boolean isForced = false;
+	private int workerName;
 
 	/**
 	 * Allows for editing of already made workers.
@@ -44,7 +45,7 @@ public class WorkerSetup extends javax.swing.JFrame {
 		for (int c = 0; c < workers.size(); c++) {
 			this.addWorker();
 		}
-
+		
 		for (int c = 0; c < workers.size(); c++) {
 			JTextField nameArea = (JTextField) this.workerTabs.get(c)
 					.getComponent(2);
@@ -85,6 +86,7 @@ public class WorkerSetup extends javax.swing.JFrame {
 		this.workerTabs = new ArrayList<JPanel>();
 		initComponents();
 		addWorker();
+		
 	}
 
 	private void addWorker() {
@@ -236,16 +238,13 @@ public class WorkerSetup extends javax.swing.JFrame {
 												javax.swing.GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE)));
 		// Prevents a nullPointer
-		if (this.workerTabs.size() == 0) {
-			this.workerTabs.add(tempWorkerTab);
-			this.workerTabPanel.addTab("Worker 1", null, tempWorkerTab, "");
-		} else {
+		// TEAM 4 SWAP 3 Fixed Bug.
 			this.workerTabs.add(tempWorkerTab);
 			this.workerTabPanel.addTab(
-					"Worker " + String.valueOf(this.workerTabs.size()), null,
+					"Worker " + String.valueOf(++this.workerName), null,
 					tempWorkerTab, "");
 		}
-	}
+	
 
 	/**
 	 * This method is called from within the constructor to initialize the form.

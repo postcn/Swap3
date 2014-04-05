@@ -10,6 +10,9 @@ import java.awt.event.ActionListener;
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -114,7 +117,24 @@ public class Config extends javax.swing.JFrame {
 							stretch();
 						}
 						dayPanels[j].checkActionPerformed();
-						dayTabs.addTab(dayPanels[j].getDayName(), dayPanels[j]);
+						
+						//TEAM 4 SWAP 3. SOrts the tabs by day, so that it's easier to read.
+						boolean toAdd[] = new boolean[7];
+						for(int x = 0; x < 7; x ++)
+						{
+							if(dayPanels[x].getCheckBox().isSelected())
+								toAdd[x] = true;
+						}
+						dayTabs.removeAll();
+						for(int x = 0; x < 7; x ++)
+						{
+							if(toAdd[x])
+							{
+								dayTabs.addTab(dayPanels[x].getDayName(), dayPanels[x]);
+							}
+						}
+						
+						
 					} else {
 						numSelected--;
 						stretch();
@@ -370,6 +390,7 @@ public class Config extends javax.swing.JFrame {
 				List<Object> jobs = Arrays.asList(this.dayPanels[i].getModel().toArray());
 				day.addAll(jobs);
 				days.add(new Day(daysOfWeek[i + 1], day));
+				Collections.sort(days);
 			}
 		}
 	}
