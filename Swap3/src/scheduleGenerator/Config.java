@@ -118,7 +118,7 @@ public class Config extends javax.swing.JFrame {
 						}
 						dayPanels[j].checkActionPerformed();
 						
-						//TEAM 4 SWAP 3. SOrts the tabs by day, so that it's easier to read.
+						//TEAM 4 SWAP 3. ENHANCEMENT. SOrts the tabs by day, so that it's easier to read.
 						boolean toAdd[] = new boolean[7];
 						for(int x = 0; x < 7; x ++)
 						{
